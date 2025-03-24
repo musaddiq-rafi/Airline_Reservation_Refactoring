@@ -61,11 +61,46 @@ public class Customer {
      * already registered, program will ask the user
      * to enter new email address to get himself register.
      */
+//    public void addNewCustomer() {
+//        System.out.printf("\n\n\n%60s ++++++++++++++ Welcome to the Customer Registration Portal ++++++++++++++", "");
+//        Scanner read = new Scanner(System.in);
+//        System.out.print("\nEnter your name :\t");
+//        String name = read.nextLine();
+//        System.out.print("Enter your email address :\t");
+//        String email = read.nextLine();
+//        while (isUniqueData(email)) {
+//            System.out.println(
+//                    "ERROR!!! User with the same email already exists... Use new email or login using the previous credentials....");
+//            System.out.print("Enter your email address :\t");
+//            email = read.nextLine();
+//        }
+//        System.out.print("Enter your Password :\t");
+//        String password = read.nextLine();
+//        System.out.print("Enter your Phone number :\t");
+//        String phone = read.nextLine();
+//        System.out.print("Enter your address :\t");
+//        String address = read.nextLine();
+//        System.out.print("Enter your age :\t");
+//        int age = read.nextInt();
+//        customerCollection.add(new Customer(name, email, password, phone, address, age));
+//    }
     public void addNewCustomer() {
         System.out.printf("\n\n\n%60s ++++++++++++++ Welcome to the Customer Registration Portal ++++++++++++++", "");
         Scanner read = new Scanner(System.in);
-        System.out.print("\nEnter your name :\t");
-        String name = read.nextLine();
+        String name = getInput(read, "Enter your name :\t");
+        String email = getEmailInput(read);
+        String password = getInput(read, "Enter your Password :\t");
+        String phone = getInput(read, "Enter your Phone number :\t");
+        String address = getInput(read, "Enter your address :\t");
+        int age = getAgeInput(read);
+        customerCollection.add(new Customer(name, email, password, phone, address, age));
+    }
+
+    private String getInput(Scanner read, String prompt){
+        System.out.print(prompt);
+        return read.nextLine();
+    }
+    private String getEmailInput(Scanner read){
         System.out.print("Enter your email address :\t");
         String email = read.nextLine();
         while (isUniqueData(email)) {
@@ -74,15 +109,11 @@ public class Customer {
             System.out.print("Enter your email address :\t");
             email = read.nextLine();
         }
-        System.out.print("Enter your Password :\t");
-        String password = read.nextLine();
-        System.out.print("Enter your Phone number :\t");
-        String phone = read.nextLine();
-        System.out.print("Enter your address :\t");
-        String address = read.nextLine();
+        return email;
+    }
+    private int getAgeInput(Scanner read){
         System.out.print("Enter your age :\t");
-        int age = read.nextInt();
-        customerCollection.add(new Customer(name, email, password, phone, address, age));
+        return read.nextInt();
     }
 
     /**
