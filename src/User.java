@@ -25,6 +25,33 @@ public class User {
     // ************************************************************
 
     public static void main(String[] args) {
+
+        initializeSystem();
+        displayWelcomeMessage();
+        displayMainMenu();
+        handleUserInput();
+    }
+
+    private static void initializeSystem() {
+        int countNumOfUsers = 1;
+        RolesAndPermissions r1 = new RolesAndPermissions();
+        Flight f1 = new Flight();
+        FlightReservation bookingAndReserving = new FlightReservation();
+        Customer c1 = new Customer();
+        f1.flightScheduler();
+
+    }
+
+    private static void displayWelcomeMessage() {
+        System.out.println(
+                "\n\t\t\t\t\t+++++++++++++ Welcome to BAV AirLines +++++++++++++\n\nTo Further Proceed, Please enter a value.");
+        System.out.println(
+                "\n***** Default Username && Password is root-root ***** Using Default Credentials will restrict you to just view the list of Passengers....\n");
+    }
+
+        // displayMainMenu();
+    private static void handleUserInput(){
+
         int countNumOfUsers = 1;
         RolesAndPermissions r1 = new RolesAndPermissions();
         Flight f1 = new Flight();
@@ -32,13 +59,6 @@ public class User {
         Customer c1 = new Customer();
         f1.flightScheduler();
         Scanner read = new Scanner(System.in);
-
-       
-        System.out.println(
-                "\n\t\t\t\t\t+++++++++++++ Welcome to BAV AirLines +++++++++++++\n\nTo Further Proceed, Please enter a value.");
-        System.out.println(
-                "\n***** Default Username && Password is root-root ***** Using Default Credentials will restrict you to just view the list of Passengers....\n");
-        displayMainMenu();
         int desiredOption = read.nextInt();
         while (desiredOption < 0 || desiredOption > 8) {
             System.out.print("ERROR!! Please enter value between 0 - 4. Enter the value again :\t");
@@ -60,7 +80,7 @@ public class User {
                 /* Default username and password.... */
                 adminUserNameAndPassword[0][0] = "root";
                 adminUserNameAndPassword[0][1] = "root";
-                
+
                 System.out.print("\nEnter the UserName to login to the Management System :     ");
                 String username = read1.nextLine();
                 System.out.print("Enter the Password to login to the Management System :    ");
@@ -105,14 +125,14 @@ public class User {
                         desiredOption = read.nextInt();
                         /* If 1 is entered by the privileged user, then add a new customer...... */
                         if (desiredOption == 1) {
-                           
+
                             c1.addNewCustomer();
                         } else if (desiredOption == 2) {
                             /*
                              * If 2 is entered by the privileged user, then call the search method of the
                              * Customer class
                              */
-                            
+
                             c1.displayCustomersData(false);
                             System.out.print("Enter the CustomerID to Search :\t");
                             String customerID = read1.nextLine();
@@ -124,11 +144,11 @@ public class User {
                              * Class with required
                              * arguments.....
                              */
-                            
+
                             c1.displayCustomersData(false);
                             System.out.print("Enter the CustomerID to Update its Data :\t");
                             String customerID = read1.nextLine();
-                            if (customersCollection.size() > 0) {
+                            if (!customersCollection.isEmpty()) {
                                 c1.editUserInfo(customerID);
                             } else {
                                 System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", customerID);
@@ -142,7 +162,7 @@ public class User {
                             c1.displayCustomersData(false);
                             System.out.print("Enter the CustomerID to Delete its Data :\t");
                             String customerID = read1.nextLine();
-                            if (customersCollection.size() > 0) {
+                            if (!customersCollection.isEmpty()) {
                                 c1.deleteUser(customerID);
                             } else {
                                 System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", customerID);
@@ -306,8 +326,8 @@ public class User {
                 desiredOption = read1.nextInt();
             }
         } while (desiredOption != 0);
-
     }
+
 
     static void displayMainMenu() {
         System.out.println("\n\n\t\t(a) Press 0 to Exit.");
@@ -383,4 +403,7 @@ public class User {
     public static List<Customer> getCustomersCollection() {
         return customersCollection;
     }
+
+
 }
+
