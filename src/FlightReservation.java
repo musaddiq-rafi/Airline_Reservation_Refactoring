@@ -29,36 +29,70 @@ public class FlightReservation implements DisplayClass {
      * @param userID       userID of the user which is booking the flight
      */
     void bookFlight(String flightNo, int numOfTickets, String userID) {
-        boolean isFound = false;
-        for (Flight f1 : flight.getFlightList()) {
-            if (flightNo.equalsIgnoreCase(f1.getFlightNumber())) {
-                for (Customer customer : Customer.customerCollection) {
-                    if (userID.equals(customer.getUserID())) {
-                        isFound = true;
-                        f1.setNoOfSeatsInTheFlight(f1.getNoOfSeats() - numOfTickets);
-                        if (!f1.isCustomerAlreadyAdded(f1.getListOfRegisteredCustomersInAFlight(), customer)) {
-                            f1.addNewCustomerToFlight(customer);
-                        }
-                        if (isFlightAlreadyAddedToCustomerList(customer.flightsRegisteredByUser, f1)) {
-                            addNumberOfTicketsToAlreadyBookedFlight(customer, numOfTickets);
-                            if (flightIndex(flight.getFlightList(), flight) != -1) {
-                                customer.addExistingFlightToCustomerList(flightIndex(flight.getFlightList(), flight), numOfTickets);
-                            }
-                        } else {
-                            customer.addNewFlightToCustomerList(f1);
-                            addNumberOfTicketsForNewFlight(customer, numOfTickets);
-                        }
-                    break;
-                    }
-                }
+        if (!isValidUser(userID)) {
+            System.out.println("Invalid user ID: " + userID);
+            return;
+        }
+
+        Customer customer = findCustomerById(userID);
+        if (customer == null) {
+            return;
+        }
+
+        Flight flightToBook = findFlightByNumber(flightNo);
+        if (flightToBook == null) {
+            System.out.println("Invalid Flight Number...! No flight with the ID \"" + flightNo + "\" was found...");
+            return;
+        }
+
+        processBooking(flightToBook, customer, numOfTickets, flightNo);
+    }
+
+    private boolean isValidUser(String userID) {
+        if (userID == null || userID.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    private Customer findCustomerById(String userID) {
+        for (Customer customer : Customer.customerCollection) {
+            if (userID.equals(customer.getUserID())) {
+                return customer;
             }
         }
-        if (!isFound) {
-            System.out.println("Invalid Flight Number...! No flight with the  ID \"" + flightNo + "\" was found...");
+        return null;
+    }
+    private Flight findFlightByNumber(String flightNo) {
+        for (Flight f1 : flight.getFlightList()) {
+            if (flightNo.equalsIgnoreCase(f1.getFlightNumber())) {
+                return f1;
+            }
+        }
+        return null;
+    }
+    private void processBooking(Flight flightToBook, Customer customer, int numOfTickets, String flightNo) {
+        flightToBook.setNoOfSeatsInTheFlight(flightToBook.getNoOfSeats() - numOfTickets);
+
+        if (!flightToBook.isCustomerAlreadyAdded(flightToBook.getListOfRegisteredCustomersInAFlight(), customer)) {
+            flightToBook.addNewCustomerToFlight(customer);
+        }
+
+        // Extract Class (1.2.3) - Using Ticket class
+        Ticket ticket = new Ticket(customer, flightToBook, numOfTickets);
+        addTicketToCustomer(customer, flightToBook, numOfTickets);
+
+        System.out.printf("\n %50s You've booked %d tickets for Flight \"%5s\"...", "", numOfTickets, flightNo.toUpperCase());
+    }
+    private void addTicketToCustomer(Customer customer, Flight flight, int numOfTickets) {
+        if (isFlightAlreadyAddedToCustomerList(customer.getFlightsRegisteredByUser(), flight)) {
+            addNumberOfTicketsToAlreadyBookedFlight(customer, numOfTickets);
         } else {
-            System.out.printf("\n %50s You've booked %d tickets for Flight \"%5s\"...", "", numOfTickets, flightNo.toUpperCase());
+            customer.addNewFlightToCustomerList(flight);
+            addNumberOfTicketsForNewFlight(customer, numOfTickets);
         }
     }
+
 
     /**
      * Cancels the flight for a particular user and return/add the numOfTickets back to

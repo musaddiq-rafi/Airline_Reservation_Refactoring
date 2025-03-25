@@ -139,15 +139,21 @@ public class Flight extends FlightDistance {
             minutes -= 60;
             hours++;
         }
-        if (hours <= 9 && Integer.toString(minutes).length() == 1) {
-            return String.format("0%s:%s0", hours, minutes);
-        } else if (hours <= 9 && Integer.toString(minutes).length() > 1) {
-            return String.format("0%s:%s", hours, minutes);
-        } else if (hours > 9 && Integer.toString(minutes).length() == 1) {
-            return String.format("%s:%s0", hours, minutes);
-        } else {
-            return String.format("%s:%s", hours, minutes);
-        }
+//        if (hours <= 9 && Integer.toString(minutes).length() == 1) {
+//            return String.format("0%s:%s0", hours, minutes);
+//        } else if (hours <= 9 && Integer.toString(minutes).length() > 1) {
+//            return String.format("0%s:%s", hours, minutes);
+//        } else if (hours > 9 && Integer.toString(minutes).length() == 1) {
+//            return String.format("%s:%s0", hours, minutes);
+//        } else {
+//            return String.format("%s:%s", hours, minutes);
+//        }
+        return formatTime(hours, minutes);
+    }
+    private String formatTime(int hours, int minutes) {
+        String hourFormat = (hours <= 9) ? "0%s" : "%s";
+        String minuteFormat = (Integer.toString(minutes).length() == 1) ? "%s0" : "%s";
+        return String.format(hourFormat + ":" + minuteFormat, hours, minutes);
     }
 
     /**
