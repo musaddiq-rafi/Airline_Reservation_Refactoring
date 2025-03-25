@@ -7,6 +7,10 @@ import java.util.*;
 
 public class Flight extends FlightDistance {
 
+    private static final double GROUND_SPEED = 450;
+    private static final int MIN_SEATS = 75;
+    private static final int MAX_SEATS = 500;
+
     //        ************************************************************ Fields ************************************************************
 
     private final String flightSchedule;
@@ -119,8 +123,7 @@ public class Flight extends FlightDistance {
      * @return formatted flight time
      */
     public String calculateFlightTime(double distanceBetweenTheCities) {
-        double groundSpeed = 450;
-        double time = (distanceBetweenTheCities / groundSpeed);
+        double time = (distanceBetweenTheCities / GROUND_SPEED);
         String timeInString = String.format("%.4s", time);
         String[] timeArray = timeInString.replace('.', ':').split(":");
         int hours = Integer.parseInt(timeArray[0]);
