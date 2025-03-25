@@ -8,7 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class User {
+public abstract class User {
+
+
+    protected String userId;
+    protected String name;
+    protected String email;
+    protected String password;
+
+
+    protected User() {
+        this.userId = null;
+        this.name = null;
+        this.email = null;
+        this.password = null;
+    }
+    protected User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     // ************************************************************ Fields
     // ************************************************************
@@ -18,7 +37,7 @@ public class User {
      * index. Max num of admins can be 10....
      */
     static String[][] adminUserNameAndPassword = new String[10][2];
-    private static List<Customer> customersCollection = new ArrayList<>();
+    private static final List<Customer> customersCollection = new ArrayList<>();
 
     // ************************************************************
     // Behaviours/Methods
@@ -49,7 +68,17 @@ public class User {
                 "\n***** Default Username && Password is root-root ***** Using Default Credentials will restrict you to just view the list of Passengers....\n");
     }
 
-        // displayMainMenu();
+    protected void displayHeader(String title) {
+        System.out.println("\n" + " ".repeat(20) + title);
+        System.out.println("+".repeat(50) + "\n");
+    }
+
+    public abstract void displayMenu();
+    public abstract boolean handleMenuChoice(int choice);
+
+    public boolean validateCredentials(String email, String password) {
+        return email.equals(this.email) && password.equals(this.password);
+    }
     private static void handleUserInput(){
 
         int countNumOfUsers = 1;
