@@ -4,7 +4,7 @@ public class Customer extends User {
 
     // ************************************************************ Fields
     // ************************************************************
-
+    String userID;
     private String email;
     private String name;
     private String phone;
@@ -26,10 +26,13 @@ public class Customer extends User {
         this.phone = null;
         this.address = null;
         this.age = 0;
+        this.flightsRegisteredByUser = new ArrayList<>();
+        this.numOfTicketsBookedByUser = new ArrayList<>();
     }
 
     @Override
     public void displayMenu() {
+        displayHeader("CUSTOMER MENU");
         System.out.println("1. Register a new flight");
         System.out.println("2. View registered flights");
         System.out.println("3. Edit user information");
@@ -110,8 +113,10 @@ public class Customer extends User {
      * @return customers data in String
      */
     private String toString(int i) {
+
+        this.userID = new RandomGenerator().getRandomNumber(); // Inline Method (1.1.2)
         return String.format("%10s| %-10d | %-10s | %-32s | %-7s | %-27s | %-35s | %-23s |", "", i,
-                randomIDDisplay(userID), name, age, email, address, phone);
+                randomIDDisplay(this.userID), name, age, email, address, phone);
     }
 
     /**

@@ -24,6 +24,7 @@ public class Flight extends FlightDistance {
     private int numOfSeatsInTheFlight;
     private List<Customer> listOfRegisteredCustomersInAFlight;
     private int customerIndex;
+    private FlightStatus status = FlightStatus.SCHEDULED;
     private static int nextFlightDay = 0;
     private static final List<Flight> flightList = new ArrayList<>();
 
@@ -332,4 +333,12 @@ public class Flight extends FlightDistance {
         return toWhichCity;
     }
 
+
+    public FlightStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FlightStatus status) {
+        this.status = status;
+    }
 }
