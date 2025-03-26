@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Customer {
+public class Customer extends User {
 
     // ************************************************************ Fields
     // ************************************************************
@@ -11,8 +11,10 @@ public class Customer {
     private final String password;
     private String address;
     private int age;
-    public List<Flight> flightsRegisteredByUser;
-    public List<Integer> numOfTicketsBookedByUser;
+    private List<Flight> flightsRegisteredByUser;
+    private List<Integer> numOfTicketsBookedByUser;
+
+    private List<Ticket> tickets;
     public static final List<Customer> customerCollection = User.getCustomersCollection();
 
     // ************************************************************
@@ -20,14 +22,13 @@ public class Customer {
     // ************************************************************
 
     Customer() {
-        this.userID = null;
-        this.name = null;
-        this.email = null;
-        this.password = null;
+        super();
         this.phone = null;
         this.address = null;
         this.age = 0;
     }
+
+
 
     /**
      * Registers new customer to the program. Obj of RandomGenerator(Composition) is
@@ -41,17 +42,14 @@ public class Customer {
      * @param age      customer's age
      */
     Customer(String name, String email, String password, String phone, String address, int age) {
-        RandomGenerator random = new RandomGenerator();
-        random.randomIDGen();
-        this.name = name;
-        this.userID = new RandomGenerator().getRandomNumber();
-        this.email = email;
-        this.password = password;
+        super(name, email, password);
+        this.userId = new RandomGenerator().getRandomNumber(); // Inline Method (1.1.2)
         this.phone = phone;
         this.address = address;
         this.age = age;
         this.flightsRegisteredByUser = new ArrayList<>();
         this.numOfTicketsBookedByUser = new ArrayList<>();
+        this.tickets = new ArrayList<>();
     }
 
     /**
