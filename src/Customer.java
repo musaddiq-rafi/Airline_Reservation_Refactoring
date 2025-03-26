@@ -211,7 +211,7 @@ public class Customer extends User {
 
     /**
      * Shows the customers' data in formatted way.
-     * 
+     *
      * @param showHeader to check if we want to print ascii art for the customers'
      *                   data.
      */
@@ -281,7 +281,7 @@ public class Customer extends User {
 
     /**
      * Adds numOfTickets to already booked flights
-     * 
+     *
      * @param index        at which flight is registered in the arraylist
      * @param numOfTickets how many tickets to add
      */
@@ -349,4 +349,23 @@ public class Customer extends User {
         this.age = age;
     }
 
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setFlightsRegisteredByUser(List<Flight> flightsRegisteredByUser) {
+        this.flightsRegisteredByUser = flightsRegisteredByUser;
+    }
+
+    public void setNumOfTicketsBookedByUser(List<Integer> numOfTicketsBookedByUser) {
+        this.numOfTicketsBookedByUser = numOfTicketsBookedByUser;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 }

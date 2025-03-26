@@ -215,11 +215,9 @@ public class Flight extends FlightDistance {
         distance = Math.acos(distance);
         distance = radianToDegree(distance);
         distance = distance * 60 * 1.1515;
-        /* On the Zero-Index, distance will be in Miles, on 1st-index, distance will be in KM and on the 2nd index distance will be in KNOTS*/
-        String[] distanceString = new String[3];
-        distanceString[0] = String.format("%.2f", distance * 0.8684);
+        String[] distanceString = new String[2];
+        distanceString[0] = String.format("%.2f", distance);
         distanceString[1] = String.format("%.2f", distance * 1.609344);
-        distanceString[2] = Double.toString(Math.round(distance * 100.0) / 100.0);
         return distanceString;
     }
 

@@ -90,6 +90,10 @@ public class RandomGenerator {
     }
 
     public String getRandomNumber() {
+        if (randomNum == null) {
+            randomIDGen();
+        }
         return randomNum;
     }
 }
+
