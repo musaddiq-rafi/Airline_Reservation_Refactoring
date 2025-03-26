@@ -4,11 +4,11 @@ public class Customer extends User {
 
     // ************************************************************ Fields
     // ************************************************************
-    private final String userID;
+
     private String email;
     private String name;
     private String phone;
-    private final String password;
+
     private String address;
     private int age;
     private List<Flight> flightsRegisteredByUser;
@@ -26,6 +26,16 @@ public class Customer extends User {
         this.phone = null;
         this.address = null;
         this.age = 0;
+    }
+
+    @Override
+    public void displayMenu() {
+        System.out.println("1. Register a new flight");
+        System.out.println("2. View registered flights");
+        System.out.println("3. Edit user information");
+        System.out.println("4. Delete user");
+        System.out.println("5. Search user by ID");
+        System.out.println("6. Exit");
     }
 
 
@@ -333,4 +343,5 @@ public class Customer extends User {
     public void setAge(int age) {
         this.age = age;
     }
+
 }

@@ -74,7 +74,7 @@ public abstract class User {
     }
 
     public abstract void displayMenu();
-    public abstract boolean handleMenuChoice(int choice);
+
 
     public boolean validateCredentials(String email, String password) {
         return email.equals(this.email) && password.equals(this.password);
