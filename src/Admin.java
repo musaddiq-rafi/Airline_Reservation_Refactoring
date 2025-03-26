@@ -36,11 +36,11 @@ public class Admin extends User {
         switch (choice) {
             case 1:
                 // Rename Method (1.5.1)
-                customer.addNewCustomer();
+                customer.registerNewCustomer();
                 break;
             case 2:
                 // Push Down Method (1.6.2) - Moved from User to Customer
-                customer.displayCustomersData(true);
+                customer.showAllCustomers(true);
                 break;
             case 3:
                 System.out.print("Enter the UserID to search:\t");
@@ -52,7 +52,7 @@ public class Admin extends User {
                 break;
             case 5:
                 System.out.print("Enter the UserID to delete:\t");
-                customer.deleteUser(read.nextLine());
+                customer.removeCustomer(read.nextLine());
                 break;
             case 6:
                 flight.flightScheduler();

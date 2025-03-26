@@ -62,7 +62,7 @@ public class UserInputHandler {
                     System.out.println(
                             "You've standard/default privileges to access the data... You can just view customers data..."
                                     + "Can't perform any actions on them....");
-                    c1.displayCustomersData(true);
+                    c1.showAllCustomers(true);
                 } else {
                     System.out.printf(
                             "%-20sLogged in Successfully as \"%s\"..... For further Proceedings, enter a value from below....",
@@ -92,14 +92,14 @@ public class UserInputHandler {
                         /* If 1 is entered by the privileged user, then add a new customer...... */
                         if (desiredOption == 1) {
 
-                            c1.addNewCustomer();
+                            c1.registerNewCustomer();
                         } else if (desiredOption == 2) {
                             /*
                              * If 2 is entered by the privileged user, then call the search method of the
                              * Customer class
                              */
 
-                            c1.displayCustomersData(false);
+                            c1.showAllCustomers(false);
                             System.out.print("Enter the CustomerID to Search :\t");
                             String customerID = read1.nextLine();
                             System.out.println();
@@ -111,7 +111,7 @@ public class UserInputHandler {
                              * arguments.....
                              */
 
-                            c1.displayCustomersData(false);
+                            c1.showAllCustomers(false);
                             System.out.print("Enter the CustomerID to Update its Data :\t");
                             String customerID = read1.nextLine();
                             if (!User.getCustomersCollection().isEmpty()) {
@@ -125,19 +125,19 @@ public class UserInputHandler {
                              * If 4 is entered, then ask the user to enter the customer id, and then delete
                              * that customer....
                              */
-                            c1.displayCustomersData(false);
+                            c1.showAllCustomers(false);
                             System.out.print("Enter the CustomerID to Delete its Data :\t");
                             String customerID = read1.nextLine();
                             if (!User.getCustomersCollection().isEmpty()) {
-                                c1.deleteUser(customerID);
+                                c1.removeCustomer(customerID);
                             } else {
                                 System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", customerID);
                             }
                         } else if (desiredOption == 5) {
                             /* Call the Display Method of Customer Class.... */
-                            c1.displayCustomersData(false);
+                            c1.showAllCustomers(false);
                         } else if (desiredOption == 6) {
-                            c1.displayCustomersData(false);
+                            c1.showAllCustomers(false);
                             System.out.print(
                                     "\n\nEnter the ID of the user to display all flights registered by that user...");
                             String id = read1.nextLine();
@@ -247,7 +247,7 @@ public class UserInputHandler {
                                     "Are you sure to delete your account...It's an irreversible action...Enter Y/y to confirm...");
                             char confirmationChar = read1.nextLine().charAt(0);
                             if (confirmationChar == 'Y' || confirmationChar == 'y') {
-                                c1.deleteUser(result[1]);
+                                c1.removeCustomer(result[1]);
                                 System.out.printf("User %s's account deleted Successfully...!!!", userName);
                                 desiredChoice = 0;
                             } else {
@@ -280,7 +280,7 @@ public class UserInputHandler {
                 }
             } else if (desiredOption == 4) {
 
-                c1.addNewCustomer();
+                c1.registerNewCustomer();
             } else if (desiredOption == 5) {
                 MenuHandler.manualInstructions();
             }

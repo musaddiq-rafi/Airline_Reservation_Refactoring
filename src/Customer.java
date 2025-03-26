@@ -72,7 +72,7 @@ public class Customer extends User {
      * already registered, program will ask the user
      * to enter new email address to get himself register.
      */
-    public void addNewCustomer() {
+    public void registerNewCustomer() {
         System.out.printf("\n\n\n%60s ++++++++++++++ Welcome to the Customer Registration Portal ++++++++++++++", "");
         Scanner read = new Scanner(System.in);
         String name = getInput(read, "Enter your name :\t");
@@ -116,7 +116,7 @@ public class Customer extends User {
 
         this.userID = new RandomGenerator().getRandomNumber(); // Inline Method (1.1.2)
         return String.format("%10s| %-10d | %-10s | %-32s | %-7s | %-27s | %-35s | %-23s |", "", i,
-                randomIDDisplay(this.userID), name, age, email, address, phone);
+                formatRandomID(this.userID), name, age, email, address, phone);
     }
 
     /**
@@ -180,7 +180,7 @@ public class Customer extends User {
                 c.setAddress(read.nextLine());
                 System.out.print("Enter the new age of Passenger " + name + ":\t");
                 c.setAge(read.nextInt());
-                displayCustomersData(false);
+                showAllCustomers(false);
                 break;
             }
         }
@@ -189,7 +189,7 @@ public class Customer extends User {
         }
     }
 
-    public void deleteUser(String ID) {
+    public void removeCustomer(String ID) {
         boolean isFound = false;
         Iterator<Customer> iterator = customerCollection.iterator();
         while (iterator.hasNext()) {
@@ -203,7 +203,7 @@ public class Customer extends User {
             iterator.remove();
             System.out.printf("\n%-50sPrinting all  Customer's Data after deleting Customer with the ID %s.....!!!!\n",
                     "", ID);
-            displayCustomersData(false);
+            showAllCustomers(false);
         } else {
             System.out.printf("%-50sNo Customer with the ID %s Found...!!!\n", " ", ID);
         }
@@ -215,7 +215,7 @@ public class Customer extends User {
      * @param showHeader to check if we want to print ascii art for the customers'
      *                   data.
      */
-    public void displayCustomersData(boolean showHeader) {
+    public void showAllCustomers(boolean showHeader) {
         displayHeader();
         Iterator<Customer> iterator = customerCollection.iterator();
         int i = 0;
@@ -257,7 +257,7 @@ public class Customer extends User {
      * @param randomID id to add space
      * @return randomID with added space
      */
-    String randomIDDisplay(String randomID) {
+    String formatRandomID(String randomID) {
         StringBuilder newString = new StringBuilder();
         for (int i = 0; i <= randomID.length(); i++) {
             if (i == 3) {
