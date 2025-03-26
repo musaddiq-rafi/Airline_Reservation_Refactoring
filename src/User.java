@@ -6,7 +6,6 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public abstract class User {
 
@@ -30,13 +29,7 @@ public abstract class User {
         this.password = password;
     }
 
-    // ************************************************************ Fields
-    // ************************************************************
 
-    /*
-     * 2D Array to store admin credentials. Default credentials are stored on [0][0]
-     * index. Max num of admins can be 10....
-     */
     static String[][] adminUserNameAndPassword = new String[10][2];
     private static final List<Customer> customersCollection = new ArrayList<>();
 
